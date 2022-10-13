@@ -3,21 +3,10 @@ import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
 import AuthResolver from './resolvers/auth-resolver';
 import db from './db/knexfile';
+import { createServer } from './server';
 
-export const createServer = async () => {
-    const server = new ApolloServer({
-        schema: await buildSchema({
-            resolvers: [AuthResolver]
-        }),
-        context: ({req, res}) => {
-            return {
-                req,
-                res,
-                db
-            }
-        }
-    })
-
+const main = async () => {
+    const server = await createServer()
     server.listen({
         port: 4001
     }).then(({ port }) => {
@@ -27,4 +16,4 @@ export const createServer = async () => {
     return server
 }
 
-createServer()
+main()
