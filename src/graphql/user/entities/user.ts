@@ -2,7 +2,7 @@ import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
 class User {
-    @Field((type) => ID)
+    @Field(() => ID)
     id!: number
 
     @Field()
@@ -18,6 +18,12 @@ class User {
 
     @Field()
     updated_at: Date
+
+    @Field()
+    display_name: string
+
+    @Field()
+    avatar?: string
 }
 
 export default User
